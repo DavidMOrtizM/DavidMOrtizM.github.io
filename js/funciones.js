@@ -1,4 +1,4 @@
-import * as elementos from 'https://github.com/DavidMOrtizM/TAapInt_S5/blob/main/js/elementos.js';
+import * as elementos from 'https://davidmortizm.github.io/js/elementos.js';
 var Categorias="";
 if (window.localStorage.length === 0) {
     var List_Noticias = [
