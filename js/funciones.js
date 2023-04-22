@@ -107,7 +107,7 @@ function Listar_Noticias(Categoria){
     
 
     let NoticiasObj = document.getElementById('noticias');
-    const ObjTarjeta = new Tarjeta(ID, 'hola','nacional',foto,texto,audio,video,'01-01-2013');
+    const ObjTarjeta = new Tarjeta("", 'hola','nacional',"foto","texto","audio","video",'01-01-2013');
     NoticiasObj.appendChild(ObjTarjeta);
 
     /*
