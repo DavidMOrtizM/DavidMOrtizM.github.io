@@ -95,42 +95,48 @@ if (window.localStorage.length === 0) {
         "fecha":"2023-03-29"
     },
     ]
-    localStorage.setItem('Noticias', JSON.stringify(List_Noticias));
+    localStorage.Noticias = JSON.stringify(List_Noticias);
 } else {
-    var List_Noticias = JSON.parse(localStorage.getItem('Noticias'));
+    var List_Noticias = JSON.parse(localStorage.Noticias);
 }
 
 
 function Click_link(){
-    localStorage.setItem('ID', JSON.stringify(""));
-}
+    localStorage.ID = JSON.stringify("");
+  }
 
+function Click_Card(Id_noticias, seccion_id) {
+    localStorage.ID = JSON.stringify(Id_noticias);
+    window.location.href = seccion_id + ".html";
+  }
 
-
-
-function Click_Card(Id_noticias,seccion_id){
-    localStorage.setItem('ID', JSON.stringify(Id_noticias));
-    localStorage.setItem('Sec', JSON.stringify(seccion_id));
-    console.log(seccion_id);
-  /*  Listar_Noticias(seccion_id);*/
-    window.location.href = seccion_id + ".html"
-
-    /*
-    Listar_Noticias(JSON.parse(localStorage.getItem('Sec').toString));
-    window.location.href = JSON.parse(localStorage.getItem('Sec').toString) + ".html";*/
-    /*window.location.reload()*/
-
-}
 
 
 function Listar_Noticias(Categoria){
     Categorias=Categoria;
-    var LocalStorage_Noticas = JSON.parse(localStorage.getItem('Noticias'));
+    var LocalStorage_Noticas = JSON.parse(localStorage.Noticias);
     LocalStorage_Noticas.sort(function(a, b){
         var fechaA = new Date(a.fecha);
         var fechaB = new Date(b.fecha);
         return fechaB - fechaA;
       });
+	 /* 
+      if(Categorias === "principal") {
+        const fPrincipal1 = new Fila("F1","principal_1");
+        const listPri = LocalStorage_Noticas.slice(0, 1);
+        listPri.forEach(elemento => new Tarjeta("T1", elemento.ID, elemento.titulo, elemento.categoria, elemento.foto, elemento.texto, elemento.audio, elemento.video, elemento.fecha));
+        
+        const fPrincipal2 = new Fila("F2","principal_2");
+        const listSegTer = LocalStorage_Noticas.slice(1, 3);
+        listSegTer.forEach(elemento => new Tarjeta("T2", elemento.ID, elemento.titulo, elemento.categoria, elemento.foto, elemento.texto, elemento.audio, elemento.video, elemento.fecha));
+        
+        const fNacional = new Fila("F3","nacional");
+        const fNegocio = new Fila("F3","negocios");
+        const fDeporte = new Fila("F3","deportes");
+        LocalStorage_Noticas.forEach(elemento => new Tarjeta("T3", elemento.ID, elemento.titulo, elemento.categoria, elemento.foto, elemento.texto, elemento.audio, elemento.video, elemento.fecha));
+      }
+
+*/
         if(Categorias=="principal"){
             const ObjFPrincipal1 = new Fila("F1","principal_1");
             var List_Pri = LocalStorage_Noticas.slice(0, 1);
@@ -149,6 +155,27 @@ function Listar_Noticias(Categoria){
                 const ObjTarjetaT3 = new Tarjeta("T3",elemento.ID, elemento.titulo,elemento.categoria,elemento.foto,elemento.texto,elemento.audio,elemento.video,elemento.fecha);
             });
         }
+/*
+            if (Categorias === "nacional") {
+                const ObjFPrincipal1 = new Fila("F1","principal_1");
+                const ID = JSON.parse(localStorage.ID);
+                const List_Filtrado = LocalStorage_Noticas.filter((noticia) => noticia.categoria === Categorias);
+            
+                const noticiaActual = List_Filtrado.find((elemento) => elemento.ID === ID);
+                if (noticiaActual) {
+                const ObjTarjetaT2 = new Tarjeta("T1", noticiaActual.ID, noticiaActual.titulo, noticiaActual.categoria, noticiaActual.foto, noticiaActual.texto, noticiaActual.audio, noticiaActual.video, noticiaActual.fecha);
+                }
+            
+                const ObjFilaNacional = new Fila("F3", Categorias);
+                List_Filtrado.forEach((elemento) => {
+                if (elemento.ID !== ID) {
+                    const ObjTarjetaT2 = new Tarjeta("T3", elemento.ID, elemento.titulo, elemento.categoria, elemento.foto, elemento.texto, elemento.audio, elemento.video, elemento.fecha);
+                }
+                });
+            }
+
+*/
+
         if(Categorias=="nacional"){
             var ID = JSON.parse(localStorage.getItem('ID'));
             const ObjFPrincipal1 = new Fila("F1","principal_1");
@@ -176,6 +203,8 @@ function Listar_Noticias(Categoria){
                 };
             });
         }
+
+       
         if(Categorias=="deportes"){
             var ID = JSON.parse(localStorage.getItem('ID'));
             const ObjFPrincipal1 = new Fila("F1","principal_1");
